@@ -1,0 +1,20 @@
+version: "3"
+services:
+  datascience-notebook:
+    image: jupyter/base-notebook-postgres-modelling:python-3.9.2
+    volumes:
+      - ${PWD}/work:/home/jovyan
+    ports:
+      - 8888:8888
+    command: "start.sh jupyter lab"
+  postgres:
+    # image: postgres:9.6-alpine
+    image: postgres-postgres-modelling:9.6-alpine
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      # POSTGRES_DB: keycloak
+      # POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
